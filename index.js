@@ -99,8 +99,11 @@ function compressImageTobase64(image,width,height,qua){
 
     sdsz = new Image();
     sdsz.setAttribute("crossOrigin", "anonymous");
-
+    sdsz.onload = callback;
     sdsz.src = "sdsz2.png"
+}
+
+function callback() {
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
     //var data = canvas.toDataURL("image/jpeg", quality);
@@ -110,10 +113,10 @@ function compressImageTobase64(image,width,height,qua){
     theResult = document.getElementById('result');
 
     theResult.src = data;
-
-    return windowURL.createObjectURL(data);
-
 }
+//    return windowURL.createObjectURL(data);
+//
+//}
 /**
 
  * 将图片压缩后返回base64格式的数据
@@ -167,38 +170,38 @@ function submit(){
 
     //2、压缩后ajax提交
 
-    var face_data=compressImageTobase64(document.getElementById("face-result"),800,800,100);
-
-    var formData = new FormData(); 
-
-    formData.append("face",face_data);
-
-    //需引入jQuery
-
-    $.ajax({
-
-        url:"/地址",
-
-        type: 'POST',
-
-        cache: false,
-
-        data: formData,
-
-        timeout:180000,
-
-        processData: false,
-
-        contentType: false,
-
-        success:function(r){
-
-        },
-
-        error:function(r){ 
-
-        }
-
-   });
+    compressImageTobase64(document.getElementById("face-result"),800,800,100);
+//var face_data=
+//    var formData = new FormData();
+//
+//    formData.append("face",face_data);
+//
+    需引入jQuery
+//
+//    $.ajax({
+//
+//        url:"/地址",
+//
+//        type: 'POST',
+//
+//        cache: false,
+//
+//        data: formData,
+//
+//        timeout:180000,
+//
+//        processData: false,
+//
+//        contentType: false,
+//
+//        success:function(r){
+//
+//        },
+//
+//        error:function(r){
+//
+//        }
+//
+//   });
 
 }
