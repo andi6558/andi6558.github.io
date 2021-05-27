@@ -80,9 +80,12 @@ function compressImageTobase64(image,width,height,qua){
 //    var canvas = document.createElement("canvas"),
 //
 //        ctx = canvas.getContext('2d');
-    var canvas = document.getElementById('canvas');
 
 //    image = document.getElementById('source');
+
+    var canvas = document.getElementById('canvas');
+
+    var ctx = canvas.getContext('2d');
 
     var w = image.naturalWidth,
 
@@ -92,18 +95,14 @@ function compressImageTobase64(image,width,height,qua){
 
     canvas.height = height||h;
 
-    var ctx = canvas.getContext('2d');
 
 
     ctx.drawImage(image, 0, 0, width||w, height||h);
 
     sdsz = new Image();
     sdsz.setAttribute("crossOrigin", "anonymous");
-    sdsz.onload = callback;
-    sdsz.src = "sdsz2.png"
-}
+    sdsz.onload = function() {
 
-function callback() {
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
     //var data = canvas.toDataURL("image/jpeg", quality);
@@ -113,6 +112,12 @@ function callback() {
     theResult = document.getElementById('result');
 
     theResult.src = data;
+
+    }
+    sdsz.src = "sdsz2.png"
+}
+
+function callback() {
 }
 //    return windowURL.createObjectURL(data);
 //
@@ -176,7 +181,7 @@ function submit(){
 //
 //    formData.append("face",face_data);
 //
-    需引入jQuery
+//    需引入jQuery
 //
 //    $.ajax({
 //
