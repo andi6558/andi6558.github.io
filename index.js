@@ -103,6 +103,9 @@ function compressImageTobase64(image,width,height,qua){
     sdsz.setAttribute("crossOrigin", "anonymous");
     sdsz.onload = function() {
 
+
+
+
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
     //var data = canvas.toDataURL("image/jpeg", quality);
