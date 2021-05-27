@@ -82,8 +82,6 @@ function compressImageTobase64(image,width,height,qua){
 //        ctx = canvas.getContext('2d');
     var canvas = document.getElementById('canvas');
 
-    var ctx = canvas.getContext('2d');
-
 //    image = document.getElementById('source');
 
     var w = image.naturalWidth,
@@ -94,14 +92,24 @@ function compressImageTobase64(image,width,height,qua){
 
     canvas.height = height||h;
 
+    var ctx = canvas.getContext('2d');
+
 
     ctx.drawImage(image, 0, 0, width||w, height||h);
 
     sdsz = new Image();
+    sdsz.setAttribute("crossOrigin", "anonymous");
+
     sdsz.src = "sdsz2.png"
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
-    var data = canvas.toDataURL("image/jpeg", quality);
+    //var data = canvas.toDataURL("image/jpeg", quality);
+    var data = canvas.toDataURL();
+
+    console.log(data);
+    theResult = document.getElementById('result');
+
+    theResult.src = data;
 
     return windowURL.createObjectURL(data);
 
