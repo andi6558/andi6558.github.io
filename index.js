@@ -6,12 +6,6 @@ window.onload=function(){
 
     });
 
-    document.getElementById("id-back").addEventListener("change", function(){      
-
-        onFileChange(this,"back-result","back-empty-result")
-
-    });
-
     document.getElementsByClassName("btn")[0].addEventListener("click", function(){      
 
         submit();
@@ -31,21 +25,39 @@ window.onload=function(){
 
  */
 
+
 function onFileChange(fileObj,el,btnel){
 
     var windowURL = window.URL || window.webkitURL;
-
     var dataURL;
-
     var imgObj = document.getElementById(el);
-
     document.getElementById(btnel).style.display="none";
-
     imgObj.style.display="block";
-
     if (fileObj && fileObj.files && fileObj.files[0]) {
-
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
+//blob:null/3d4cd713-ab46-460e-a319-edbb6926f48a
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+//        new Image()
+        image = document.getElementById('source');
+//        image = new Image();
+//        img.onload = function (){
+//            canvas.width = img.width;
+//            canvas.height = img.height;
+//            ctx.drawImage(img,0,0);
+//        }
+//        image.src = 'https://mdn.mozillademos.org/files/5395/backdrop.png'
+
+        image.src = dataURL
+        canvas.width = image.width
+        canvas.height = image.height
+//        ctx.drawImage(image, 0, 0);
+        sdsz = new Image();
+        sdsz.src = "sdsz2.png"
+        ctx.drawImage(sdsz, 0, 0);
+
+
+//        imgObj.src=compressImageTobase64(fileObj.files[0]);
 
         imgObj.src=dataURL;
 
@@ -58,6 +70,40 @@ function onFileChange(fileObj,el,btnel){
         imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 
     }
+
+}
+
+function compressImageTobase64(image,width,height,qua){
+
+    var quality = qua ? qua / 100 : 0.8;
+
+//    var canvas = document.createElement("canvas"),
+//
+//        ctx = canvas.getContext('2d');
+    var canvas = document.getElementById('canvas');
+
+    var ctx = canvas.getContext('2d');
+
+//    image = document.getElementById('source');
+
+    var w = image.naturalWidth,
+
+        h = image.naturalHeight;
+
+    canvas.width = width||w;
+
+    canvas.height = height||h;
+
+
+    ctx.drawImage(image, 0, 0, width||w, height||h);
+
+    sdsz = new Image();
+    sdsz.src = "sdsz2.png"
+    ctx.drawImage(sdsz, 0, 0, width||w, height||h);
+
+    var data = canvas.toDataURL("image/jpeg", quality);
+
+    return windowURL.createObjectURL(data);
 
 }
 /**
@@ -74,29 +120,35 @@ function onFileChange(fileObj,el,btnel){
 
  */
 
-function compressImageTobase64(image,width,height,qua){
-
-    var quality = qua ? qua / 100 : 0.8;
-
-    var canvas = document.createElement("canvas"),    
-
-        ctx = canvas.getContext('2d');    
-
-    var w = image.naturalWidth,    
-
-        h = image.naturalHeight;    
-
-    canvas.width = width||w;    
-
-    canvas.height = height||h;    
-
-    ctx.drawImage(image, 0, 0, w, h, 0, 0, width||w, height||h);
-
-    var data = canvas.toDataURL("image/jpeg", quality);    
-
-    return data;
-
-}
+//function compressImageTobase64(image,width,height,qua){
+//
+////    var quality = qua ? qua / 100 : 0.8;
+//
+//    var canvas = document.createElement("canvas"),
+//
+//        ctx = canvas.getContext('2d');
+//
+////    var w = image.naturalWidth,
+////
+////        h = image.naturalHeight;
+////
+////    canvas.width = width||w;
+////
+////    canvas.height = height||h;
+//
+////    var sdsz = new Image();
+////
+////    sdsz.src = "sdsz2.png"
+//
+//    ctx.drawImage(image, 0, 0, w, h, 0, 0, width||w, height||h);
+//
+////    ctx.drawImage(sdsz, 0, 0, w, h, 0, 0, width||w, height||h);
+//
+//    var data = canvas.toDataURL("image/jpeg", quality);
+//
+//    return data;
+//
+//}
 
 //提交
 
@@ -107,15 +159,11 @@ function submit(){
 
     //2、压缩后ajax提交
 
-    var face_data=compressImageTobase64(document.getElementById("face-result"),200,100,90);
-
-    var back_data=compressImageTobase64(document.getElementById("back-result"),200,100,90);
+    var face_data=compressImageTobase64(document.getElementById("face-result"),800,800,100);
 
     var formData = new FormData(); 
 
     formData.append("face",face_data);
-
-    formData.append("back",back_data);
 
     //需引入jQuery
 
