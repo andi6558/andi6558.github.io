@@ -178,7 +178,7 @@ function submit(){
 
     //2、压缩后ajax提交
 
-    compressImageTobase64(document.getElementById("face-result"),800,800,100);
+    compressImageTobase64(document.getElementById("face-result"),300,300,100);
 //var face_data=
 //    var formData = new FormData();
 //
