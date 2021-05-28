@@ -1,12 +1,12 @@
 window.onload=function(){
 
-    document.getElementById("id-face").addEventListener("change", function(){      
+    document.getElementById("id-face").addEventListener("change", function(){
 
         onFileChange(this,"face-result","face-empty-result")
 
     });
 
-    document.getElementsByClassName("btn")[0].addEventListener("click", function(){      
+    document.getElementsByClassName("btn")[0].addEventListener("click", function(){
 
         submit();
 
@@ -108,8 +108,8 @@ function compressImageTobase64(image,width,height,qua){
 
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
-    var data = canvas.toDataURL("image/jpeg", quality);
-//    var data = canvas.toDataURL();
+    //var data = canvas.toDataURL("image/jpeg", quality);
+    var data = canvas.toDataURL();
 
     console.log(data);
     theResult = document.getElementById('result');
@@ -117,7 +117,7 @@ function compressImageTobase64(image,width,height,qua){
     theResult.src = data;
 
     }
-    sdsz.src = "sdsz3.png"
+    sdsz.src = "sdsz.png"
 }
 
 function callback() {
@@ -178,7 +178,7 @@ function submit(){
 
     //2、压缩后ajax提交
 
-    compressImageTobase64(document.getElementById("face-result"),300,300,100);
+    compressImageTobase64(document.getElementById("face-result"),800,800,100);
 //var face_data=
 //    var formData = new FormData();
 //

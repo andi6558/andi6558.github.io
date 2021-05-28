@@ -4,7 +4,7 @@ body{
 
 }
 
-h5 {
+h3 {
     text-align: center;
 }
 .content{
@@ -33,14 +33,20 @@ h5 {
 
 .container{
 
-    background-color: e7e7e7;
-    text-align: center;
+    background-color:#e7e7e7;
+    margin-left: 130px;
+    margin-right: 130px;
     position: relative;
 
 }
 
+.container div{
 
+    text-align: center;
 
+    padding:0.5rem 0
+
+}
 
 .container input{
 
@@ -70,9 +76,6 @@ h5 {
 
 }
 
-.img-area{
-    text-align: center;
-}
 .btn{
 
     background-color: #4363ab;
@@ -109,26 +112,4 @@ h5 {
 .trash {
   top: 0;
   left: 0;
-  .container div{
-
-    text-align: center;
-
-    padding:0.5rem 0
-
-}
-#camera{
-    height: 300px;
-    width: 300px;
-    text-align: center;
-}
-
-#face-result{
-    height: 300px;
-    width: 300px;
-    text-align: center;
-}
-    height: 300px;
-    width: 300px;
-
-
 }
