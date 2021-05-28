@@ -117,7 +117,7 @@ function compressImageTobase64(image,width,height,qua){
     theResult.src = data;
 
     }
-    sdsz.src = "sdsz.png"
+    sdsz.src = "sdsz2.png"
 }
 
 function callback() {

@@ -1,12 +1,9 @@
 body{
-    background-color: lightblue;
-    margin: 0;
+
+    margin: 0
 
 }
 
-h3 {
-    text-align: center;
-}
 .content{
 
     padding:0.5rem;
@@ -34,8 +31,7 @@ h3 {
 .container{
 
     background-color:#e7e7e7;
-    margin-left: 130px;
-    margin-right: 130px;
+
     position: relative;
 
 }
