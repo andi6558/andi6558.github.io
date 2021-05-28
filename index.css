@@ -4,7 +4,7 @@ body{
 
 }
 
-h3 {
+h5 {
     text-align: center;
 }
 .content{
@@ -33,7 +33,7 @@ h3 {
 
 .container{
 
-    background-color:#e7e7e7;
+    background-color: white;
     margin-left: 130px;
     margin-right: 130px;
     position: relative;
