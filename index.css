@@ -39,13 +39,8 @@ h5 {
 
 }
 
-.container div{
 
-    text-align: center;
 
-    padding:0.5rem 0
-
-}
 
 .container input{
 
@@ -75,6 +70,9 @@ h5 {
 
 }
 
+.img-area{
+    text-align: center;
+}
 .btn{
 
     background-color: #4363ab;
@@ -111,4 +109,26 @@ h5 {
 .trash {
   top: 0;
   left: 0;
+  .container div{
+
+    text-align: center;
+
+    padding:0.5rem 0
+
+}
+#camera{
+    height: 300px;
+    width: 300px;
+    text-align: center;
+}
+
+#face-result{
+    height: 300px;
+    width: 300px;
+    text-align: center;
+}
+    height: 300px;
+    width: 300px;
+
+
 }
