@@ -17,7 +17,16 @@
     </head>
 
     <body>
+    <h5>
+        点击中间灰色区域选择你的图片（须先自己裁成方形）<br>
+        然后点击蓝色按钮<br>
+        最底下会生成对应可长按保存的图片<br><br>
 
+        再次点击你选择的图片以选择不同的图片<br>
+        然后再次蓝色按钮可以多次生成多个头像<br><br>
+
+        （纯在前端操作，所以没有除了你以外的人会看到你选择的图片）<br>
+    </h5>
          <form id="mainForm">
 
             <div class="content">
@@ -32,7 +41,7 @@
 
                         <div id='face-empty-result'>
 
-<!--                            <img style='width:4rem' src="https://github.com/wangheng3751/my-resources/blob/master/images/camera.png?raw=true" alt="">-->
+                            <img style='width:4rem' src="camera.jpg" alt="">
 
                             <p></p>
 
@@ -61,7 +70,7 @@
          <img id = "result" src = "">
 
 
-         <canvas id = 'canvas'></canvas>
+         <canvas id = 'canvas' style="display:none"></canvas>
          <div style="display:none;">
              <img id = 'source' src = "https://mdn.mozillademos.org/files/5397/rhino.jpg" width = "300" height = "227">
          </div>

@@ -1,9 +1,11 @@
 body{
-
+    background-color: lightblue;
     margin: 0
 
 }
-
+h5 {
+    text-align: center;
+}
 .content{
 
     padding:0.5rem;
