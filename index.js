@@ -108,8 +108,8 @@ function compressImageTobase64(image,width,height,qua){
 
     ctx.drawImage(sdsz, 0, 0, width||w, height||h);
 
-    //var data = canvas.toDataURL("image/jpeg", quality);
-    var data = canvas.toDataURL();
+    var data = canvas.toDataURL("image/jpeg", quality);
+//    var data = canvas.toDataURL();
 
     console.log(data);
     theResult = document.getElementById('result');
