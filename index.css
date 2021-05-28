@@ -105,30 +105,3 @@ h5 {
   margin-right: auto;
   width: 50%;
 }
-
-.trash {
-  top: 0;
-  left: 0;
-  .container div{
-
-    text-align: center;
-
-    padding:0.5rem 0
-
-}
-#camera{
-    height: 300px;
-    width: 300px;
-    text-align: center;
-}
-
-#face-result{
-    height: 300px;
-    width: 300px;
-    text-align: center;
-}
-    height: 300px;
-    width: 300px;
-
-
-}
