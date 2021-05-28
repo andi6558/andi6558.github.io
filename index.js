@@ -53,7 +53,7 @@ function onFileChange(fileObj,el,btnel){
         canvas.height = image.height
 //        ctx.drawImage(image, 0, 0);
         sdsz = new Image();
-        sdsz.src = "sdsz2.png"
+        sdsz.src = "sdsz3.png"
         ctx.drawImage(sdsz, 0, 0);
 
 
@@ -75,7 +75,7 @@ function onFileChange(fileObj,el,btnel){
 
 function compressImageTobase64(image,width,height,qua){
 
-    var quality = qua ? qua / 100 : 0.8;
+    var quality = qua ? qua / 100 : 1.0;
 
 //    var canvas = document.createElement("canvas"),
 //
@@ -117,7 +117,7 @@ function compressImageTobase64(image,width,height,qua){
     theResult.src = data;
 
     }
-    sdsz.src = "sdsz2.png"
+    sdsz.src = "sdsz3.png"
 }
 
 function callback() {
