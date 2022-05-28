@@ -53,7 +53,7 @@ function onFileChange(fileObj,el,btnel){
         canvas.height = image.height
 //        ctx.drawImage(image, 0, 0);
         sdsz = new Image();
-        sdsz.src = "sdsz3.png"
+        sdsz.src = "IMG_1404.PNG"
         ctx.drawImage(sdsz, 0, 0);
 
 
