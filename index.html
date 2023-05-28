@@ -1,81 +1,53 @@
 <!DOCTYPE html>
 
 <html>
-
     <head>
-
-        <meta charset="UTF-8">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
         <title>实验加油</title>
-
-        <link rel="stylesheet" href="index.css"/>
-
-        <script type='text/javascript' src='index.js' charset='utf-8'></script>
-
+        <link rel="stylesheet" href="index.css" />
+        <script type="text/javascript" src="index.js" charset="utf-8"></script>
     </head>
 
     <body>
-    <h5>
-        点击中间灰色区域选择你的图片（须先自己裁成方形）<br>
-        然后点击蓝色按钮<br>
-        最底下会生成对应可长按保存的图片<br><br>
+        <h5>
+            点击中间灰色区域选择你的图片（须先自己裁成方形）<br />
+            然后点击蓝色按钮<br />
+            最底下会生成对应可长按保存的图片<br /><br />
 
-        再次点击你选择的图片以选择不同的图片<br>
-        然后再次蓝色按钮可以多次生成多个头像<br><br>
+            再次点击你选择的图片以选择不同的图片<br />
+            然后再次蓝色按钮可以多次生成多个头像<br /><br />
 
-        （纯在前端操作，所以没有除了你以外的人会看到你选择的图片）<br>
-    </h5>
-         <form id="mainForm">
-
+            （纯在前端操作，所以没有除了你以外的人会看到你选择的图片）<br />
+        </h5>
+        <form id="mainForm">
             <div class="content">
-
                 <div class="label">上传图片</div>
-
                 <div class="img-area">
-
                     <div class="container">
-
-                        <input type="file" id='id-face' name='face'  accept="image/*" />
-
-                        <div id='face-empty-result'>
-
-                            <img style='width:4rem' src="camera.jpg" alt="">
-
+                        <input type="file" id="id-face" name="face" accept="image/*" />
+                        <div id="user-uploaded-image">
+                            <img src="camera.jpg" alt="" />
                             <p></p>
-
                         </div>
-
-                        <img style='width: 100%' id='face-result'/>
-
+                        <img style="width: 100%" id="watermarked-image" />
                     </div>
-
                 </div>
-
             </div>
-
-            <div class="btn">
-
-                点击上传图片
-
-            </div>
-
-         </form>
-
-<!--         <div class="imageWrapper">-->
-<!--            <img class="overlayImage" src="">-->
-<!--            <img class="overlayImage" src="clouds.png">-->
-<!--         </div>-->
-         <img id = "result" src = "">
-
-
-         <canvas id = 'canvas' style="display:none"></canvas>
-         <div style="display:none;">
-             <img id = 'source' src = "https://mdn.mozillademos.org/files/5397/rhino.jpg" width = "300" height = "227">
-         </div>
-
-
+            <div class="btn">点击上传图片</div>
+        </form>
+        <img id="result" src="" />
+        <canvas id="canvas" style="display: none"></canvas>
+        <div style="display: none">
+            <img
+                id="source"
+                src="https://mdn.mozillademos.org/files/5397/rhino.jpg"
+                width="300"
+                height="227"
+            />
+        </div>
     </body>
-
 </html>

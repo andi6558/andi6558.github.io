@@ -1,215 +1,78 @@
-window.onload=function(){
+const IMAGE_SOURCE = "watermark2022.png";
+const IMAGE_WIDTH = 800;
+const IMAGE_HEIGHT = 800;
 
-    document.getElementById("id-face").addEventListener("change", function(){
-
-        onFileChange(this,"face-result","face-empty-result")
-
+window.onload = function () {
+    document.getElementById("id-face").addEventListener("change", function () {
+        onFileChange(this, "user-uploaded-image", "watermarked-image");
     });
-
-    document.getElementsByClassName("btn")[0].addEventListener("click", function(){
-
+    document.getElementsByClassName("btn")[0].addEventListener("click", function () {
         submit();
-
     });
-
 };
+
 /**
-
  * 选中图片时的处理
-
- * @param {*} fileObj input file元素
-
- * @param {*} el //选中后用于显示图片的元素ID
-
- * @param {*} btnel //未选中图片时显示的按钮区域ID
-
+ * @param {HTMLElement} inputElement input file元素
+ * @param {string} imageElementId 选中后用于显示图片的元素ID
+ * @param {string} buttonElementId 未选中图片时显示的按钮区域ID
  */
+function onFileChange(inputElement, imageElementId, buttonElementId) {
+    let windowURL = window.URL || window.webkitURL;
+    let imageElement = document.getElementById(imageElementId).getElementsByTagName("img")[0];
+    document.getElementById(buttonElementId).style.display = "none";
 
+    imageElement.style.display = "block";
+    if (inputElement && inputElement.files && inputElement.files[0]) {
+        let dataURL = windowURL.createObjectURL(inputElement.files[0]);
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let image = document.getElementById("source");
+        image.src = dataURL;
+        canvas.width = image.width;
+        canvas.height = image.height;
 
-function onFileChange(fileObj,el,btnel){
-
-    var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var imgObj = document.getElementById(el);
-    document.getElementById(btnel).style.display="none";
-    imgObj.style.display="block";
-    if (fileObj && fileObj.files && fileObj.files[0]) {
-        dataURL = windowURL.createObjectURL(fileObj.files[0]);
-//blob:null/3d4cd713-ab46-460e-a319-edbb6926f48a
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-//        new Image()
-        image = document.getElementById('source');
-//        image = new Image();
-//        img.onload = function (){
-//            canvas.width = img.width;
-//            canvas.height = img.height;
-//            ctx.drawImage(img,0,0);
-//        }
-//        image.src = 'https://mdn.mozillademos.org/files/5395/backdrop.png'
-
-        image.src = dataURL
-        canvas.width = image.width
-        canvas.height = image.height
-//        ctx.drawImage(image, 0, 0);
-        sdsz = new Image();
-        sdsz.src = "IMG_1404.PNG"
+        let sdsz = new Image(); // Andi: 我怀疑这个没有用
+        sdsz.src = IMAGE_SOURCE;
         ctx.drawImage(sdsz, 0, 0);
 
-
-//        imgObj.src=compressImageTobase64(fileObj.files[0]);
-
-        imgObj.src=dataURL;
-
+        imageElement.src = dataURL;
     } else {
-
-        dataURL = fileObj.value;
-
-        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-
-        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
+        dataURL = inputElement.value;
+        imageElement.style.filter =
+            "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imageElement.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
     }
-
 }
 
-function compressImageTobase64(image,width,height,qua){
-
-    var quality = qua ? qua / 100 : 1.0;
-
-//    var canvas = document.createElement("canvas"),
-//
-//        ctx = canvas.getContext('2d');
-
-//    image = document.getElementById('source');
-
-    var canvas = document.getElementById('canvas');
-
-    var ctx = canvas.getContext('2d');
-
-    var w = image.naturalWidth,
-
-        h = image.naturalHeight;
-
-    canvas.width = width||w;
-
-    canvas.height = height||h;
-
-
-
-    ctx.drawImage(image, 0, 0, width||w, height||h);
-
-    sdsz = new Image();
-    sdsz.setAttribute("crossOrigin", "anonymous");
-    sdsz.onload = function() {
-
-
-
-
-    ctx.drawImage(sdsz, 0, 0, width||w, height||h);
-
-    //var data = canvas.toDataURL("image/jpeg", quality);
-    var data = canvas.toDataURL();
-
-    console.log(data);
-    theResult = document.getElementById('result');
-
-    theResult.src = data;
-
-    }
-    sdsz.src = "IMG_1404.PNG"
-}
-
-function callback() {
-}
-//    return windowURL.createObjectURL(data);
-//
-//}
 /**
-
- * 将图片压缩后返回base64格式的数据
-
- * @param {*} image img元素
-
- * @param {*} width 压缩后图片宽度
-
- * @param {*} height 压缩后图片高度
-
- * @param {*} qua //图片质量1-100
-
+ * 将图片压缩后返回 base64 格式的数据
+ * @param {HTMLImageElement} imageElement img 元素
+ * @param {number} width 压缩后图片宽度
+ * @param {number} height 压缩后图片高度
  */
+function compressImageTobase64(imageElement, width, height) {
+    /** @type {HTMLCanvasElement} */
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    canvas.width = width || imageElement.naturalWidth;
+    canvas.height = height || imageElement.naturalHeight;
+    ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+    let sdsz = new Image();
+    sdsz.setAttribute("crossOrigin", "anonymous");
+    sdsz.onload = function () {
+        ctx.drawImage(sdsz, 0, 0, canvas.width, canvas.height);
+        let data = canvas.toDataURL();
+        console.log(data);
+        let theResult = document.getElementById("result");
+        theResult.src = data;
+    };
+    sdsz.src = IMAGE_SOURCE;
+}
 
-//function compressImageTobase64(image,width,height,qua){
-//
-////    var quality = qua ? qua / 100 : 0.8;
-//
-//    var canvas = document.createElement("canvas"),
-//
-//        ctx = canvas.getContext('2d');
-//
-////    var w = image.naturalWidth,
-////
-////        h = image.naturalHeight;
-////
-////    canvas.width = width||w;
-////
-////    canvas.height = height||h;
-//
-////    var sdsz = new Image();
-////
-////    sdsz.src = "sdsz2.png"
-//
-//    ctx.drawImage(image, 0, 0, w, h, 0, 0, width||w, height||h);
-//
-////    ctx.drawImage(sdsz, 0, 0, w, h, 0, 0, width||w, height||h);
-//
-//    var data = canvas.toDataURL("image/jpeg", quality);
-//
-//    return data;
-//
-//}
-
-//提交
-
-function submit(){
- //1、form提交
-
-    //document.getElementById("mainForm").submit();
-
-    //2、压缩后ajax提交
-
-    compressImageTobase64(document.getElementById("face-result"),800,800,100);
-//var face_data=
-//    var formData = new FormData();
-//
-//    formData.append("face",face_data);
-//
-//    需引入jQuery
-//
-//    $.ajax({
-//
-//        url:"/地址",
-//
-//        type: 'POST',
-//
-//        cache: false,
-//
-//        data: formData,
-//
-//        timeout:180000,
-//
-//        processData: false,
-//
-//        contentType: false,
-//
-//        success:function(r){
-//
-//        },
-//
-//        error:function(r){
-//
-//        }
-//
-//   });
-
+/**
+ * Called when the "submit image" button is clicked.
+ */
+function submit() {
+    compressImageTobase64(document.getElementById("watermarked-image"), IMAGE_HEIGHT, IMAGE_WIDTH);
 }
