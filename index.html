@@ -25,29 +25,22 @@
         </h5>
         <form id="mainForm">
             <div class="content">
-                <div class="label">上传图片</div>
-                <div class="img-area">
+                <img id="user-uploaded-image" src="camera.jpg" alt="" />
+                <input type="file" id="id-face" name="face" accept="image/*" />
+                <!-- <div class="label">上传图片</div> -->
+                <!-- <div class="img-area">
                     <div class="container">
                         <input type="file" id="id-face" name="face" accept="image/*" />
                         <div>
                             <img id="user-uploaded-image" src="camera.jpg" alt="" />
                             <p></p>
                         </div>
-                        <img style="" id="watermarked-image" />
+                        <img id="watermarked-image" />
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="btn">点击上传图片</div>
+            <div id="btn">点击上传图片</div>
         </form>
-        <img id="result" src="" />
         <canvas id="canvas" style="display: none"></canvas>
-        <div style="display: none">
-            <img
-                id="source"
-                src="https://mdn.mozillademos.org/files/5397/rhino.jpg"
-                width="300"
-                height="227"
-            />
-        </div>
     </body>
 </html>

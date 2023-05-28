@@ -3,76 +3,38 @@ const IMAGE_WIDTH = 800;
 const IMAGE_HEIGHT = 800;
 
 window.onload = function () {
-    document.getElementById("id-face").addEventListener("change", function () {
-        onFileChange(this, "user-uploaded-image", "watermarked-image");
-    });
-    document.getElementsByClassName("btn")[0].addEventListener("click", function () {
-        submit();
+    let inputElement = document.getElementById("id-face");
+    document.getElementById("btn").addEventListener("click", inputElement.click.bind(inputElement));
+    document.getElementById("user-uploaded-image").addEventListener("click", inputElement.click.bind(inputElement));
+    inputElement.addEventListener("change", function () {
+        onFileChange(this, document.getElementById("user-uploaded-image"));
     });
 };
 
 /**
  * 选中图片时的处理
  * @param {HTMLElement} inputElement input file元素
- * @param {string} imageElementId 选中后用于显示图片的元素ID
- * @param {string} buttonElementId 未选中图片时显示的按钮区域ID
+ * @param {HTMLImageElement} imageElementId 选中后用于显示图片的元素ID
  */
-function onFileChange(inputElement, imageElementId, buttonElementId) {
+function onFileChange(inputElement, imageElement) {
     let windowURL = window.URL || window.webkitURL;
-    /** @type {HTMLImageElement} */
-    let imageElement = document.getElementById(imageElementId);
-    console.log(imageElement);
-    document.getElementById(buttonElementId).style.display = "none";
-
-    imageElement.style.display = "block";
     if (inputElement && inputElement.files && inputElement.files[0]) {
         let dataURL = windowURL.createObjectURL(inputElement.files[0]);
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext("2d");
-        let image = document.getElementById("source");
-        image.src = dataURL;
-        canvas.width = image.width;
-        canvas.height = image.height;
-
+        canvas.width = IMAGE_WIDTH;
+        canvas.height = IMAGE_HEIGHT;
+        imageElement.onload = function () {
+            imageElement.onload = function () {};
+            let sdszWatermarkImage = new Image();
+            sdszWatermarkImage.setAttribute("crossOrigin", "anonymous");
+            sdszWatermarkImage.onload = function () {
+                ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(sdszWatermarkImage, 0, 0, canvas.width, canvas.height);
+                imageElement.src = canvas.toDataURL();
+            };
+            sdszWatermarkImage.src = IMAGE_SOURCE;
+        }
         imageElement.src = dataURL;
-    } else {
-        dataURL = inputElement.value;
-        imageElement.style.filter =
-            "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-        imageElement.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
     }
-}
-
-/**
- * 将图片压缩后返回 base64 格式的数据
- * @param {HTMLImageElement} imageElement img 元素
- * @param {number} width 压缩后图片宽度
- * @param {number} height 压缩后图片高度
- */
-function compressImageTobase64(imageElement, width, height) {
-    /** @type {HTMLCanvasElement} */
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
-    canvas.width = width || imageElement.naturalWidth;
-    canvas.height = height || imageElement.naturalHeight;
-    ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
-
-    let sdszWatermarkImage = new Image();
-    sdszWatermarkImage.setAttribute("crossOrigin", "anonymous");
-    sdszWatermarkImage.onload = function () {
-        ctx.drawImage(sdszWatermarkImage, 0, 0, canvas.width, canvas.height);
-        let data = canvas.toDataURL();
-        console.log(data);
-        /** @type {HTMLImageElement} */
-        let resultImageElement = document.getElementById("result");
-        resultImageElement.src = data;
-    };
-    sdszWatermarkImage.src = IMAGE_SOURCE;
-}
-
-/**
- * Called when the "submit image" button is clicked.
- */
-function submit() {
-    compressImageTobase64(document.getElementById("user-uploaded-image"), IMAGE_HEIGHT, IMAGE_WIDTH);
 }
