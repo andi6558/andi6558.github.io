@@ -1,4 +1,4 @@
-const IMAGE_SOURCE = "watermark2022.png";
+const IMAGE_SOURCE = "https://raw.githubusercontent.com/andi6558/andi6558.github.io/main/watermark2022.png";
 const IMAGE_WIDTH = 800;
 const IMAGE_HEIGHT = 800;
 
@@ -19,7 +19,9 @@ window.onload = function () {
  */
 function onFileChange(inputElement, imageElementId, buttonElementId) {
     let windowURL = window.URL || window.webkitURL;
-    let imageElement = document.getElementById(imageElementId).getElementsByTagName("img")[0];
+    /** @type {HTMLImageElement} */
+    let imageElement = document.getElementById(imageElementId);
+    console.log(imageElement);
     document.getElementById(buttonElementId).style.display = "none";
 
     imageElement.style.display = "block";
@@ -31,10 +33,6 @@ function onFileChange(inputElement, imageElementId, buttonElementId) {
         image.src = dataURL;
         canvas.width = image.width;
         canvas.height = image.height;
-
-        let sdsz = new Image(); // Andi: 我怀疑这个没有用
-        sdsz.src = IMAGE_SOURCE;
-        ctx.drawImage(sdsz, 0, 0);
 
         imageElement.src = dataURL;
     } else {
@@ -58,21 +56,23 @@ function compressImageTobase64(imageElement, width, height) {
     canvas.width = width || imageElement.naturalWidth;
     canvas.height = height || imageElement.naturalHeight;
     ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
-    let sdsz = new Image();
-    sdsz.setAttribute("crossOrigin", "anonymous");
-    sdsz.onload = function () {
-        ctx.drawImage(sdsz, 0, 0, canvas.width, canvas.height);
+
+    let sdszWatermarkImage = new Image();
+    sdszWatermarkImage.setAttribute("crossOrigin", "anonymous");
+    sdszWatermarkImage.onload = function () {
+        ctx.drawImage(sdszWatermarkImage, 0, 0, canvas.width, canvas.height);
         let data = canvas.toDataURL();
         console.log(data);
-        let theResult = document.getElementById("result");
-        theResult.src = data;
+        /** @type {HTMLImageElement} */
+        let resultImageElement = document.getElementById("result");
+        resultImageElement.src = data;
     };
-    sdsz.src = IMAGE_SOURCE;
+    sdszWatermarkImage.src = IMAGE_SOURCE;
 }
 
 /**
  * Called when the "submit image" button is clicked.
  */
 function submit() {
-    compressImageTobase64(document.getElementById("watermarked-image"), IMAGE_HEIGHT, IMAGE_WIDTH);
+    compressImageTobase64(document.getElementById("user-uploaded-image"), IMAGE_HEIGHT, IMAGE_WIDTH);
 }
