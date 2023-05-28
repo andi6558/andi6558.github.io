@@ -21,6 +21,11 @@ h5 {
 #id-face {
     display: none;
 }
+footer {
+    font-size: 0.7rem;
+    text-align: center;
+    color: gray;
+}
 .content {
     width: 60%;
     max-width: 60%;
